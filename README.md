@@ -1,347 +1,84 @@
-# PRD – Sistema Web para Elaboração de Plano de Negócios
+# Business Plan Builder
 
-## 1. Visão Geral
+O **Business Plan Builder** é uma plataforma web moderna e interativa de tema claro desenvolvida para auxiliar empreendedores a planejar, simular e estruturar planos de negócios completos. O sistema foi construído em estrita conformidade com o manual metodológico oficial **"Como Elaborar um Plano de Negócios" (Sebrae, 2021)**.
 
-### Nome do Produto
-
-**Business Plan Builder**
-
-### Propósito
-
-O Business Plan Builder é uma plataforma web que auxilia empreendedores na criação, organização e validação de um Plano de Negócios completo, seguindo as boas práticas e a estrutura proposta pelo Sebrae.
-
-A solução deve transformar um processo tradicionalmente realizado em documentos extensos e planilhas em uma experiência guiada, interativa e acessível, permitindo que o usuário construa seu plano de forma gradual e acompanhe sua evolução até a geração do documento final.
+A aplicação transforma o processo tradicional de planejamento (geralmente feito em planilhas e documentos extensos e desconexos) em uma jornada fluida, visual e integrada, permitindo o salvamento reativo de progresso e simulações simultâneas de viabilidade.
 
 ---
 
-## 2. Problema
+## 🚀 Funcionalidades Principais
 
-Muitos empreendedores possuem ideias de negócio, mas enfrentam dificuldades para estruturar informações essenciais como:
+O sistema é dividido em **9 módulos integrados**:
 
-* Proposta de valor;
-* Público-alvo;
-* Análise de concorrência;
-* Estratégias de marketing;
-* Planejamento operacional;
-* Viabilidade financeira.
-
-Além disso, a elaboração manual de um plano de negócios costuma ser complexa, extensa e desorganizada.
-
-O sistema busca simplificar esse processo por meio de uma jornada orientada.
-
----
-
-## 3. Objetivos do Produto
-
-O sistema deve permitir que um usuário:
-
-* Crie um ou mais planos de negócios.
-* Desenvolva cada etapa do plano de forma organizada.
-* Salve o progresso continuamente.
-* Visualize indicadores de conclusão.
-* Receba orientações durante o preenchimento.
-* Gere um documento final consolidado.
-* Compartilhe ou apresente seu plano para investidores, parceiros ou instituições financeiras.
+1. **📊 Painel Geral (Dashboard):** Centraliza os principais indicadores de viabilidade financeira (Investimento Inicial, Faturamento, Lucro Líquido e Payback) com gráficos circulares/barras SVG de distribuição de aportes e progresso de preenchimento, fornecendo recomendações de viabilidade automatizadas com base no desempenho do plano.
+2. **1️⃣ Identidade do Negócio:** Cadastro dos pilares estratégicos (Missão, Visão, Valores, Diferenciais Competitivos), definição de setores de atividade, regimes jurídicos e enquadramentos tributários, além de um quadro dinâmico de sócios fundadores.
+3. **2️⃣ Resumo Executivo:** Espaço estruturado para o empreendedor resumir a oportunidade identificada, problema de mercado, solução inovadora, mercado-alvo e potencial de escalabilidade.
+4. **3️⃣ Análise de Mercado:** Estudo aprofundado do público-alvo, matriz comparativa de concorrentes (preço, qualidade, atendimento e localização) e mapeamento de fornecedores estratégicos.
+5. **4️⃣ Matriz SWOT (FOFA):** Quadro visual e interativo em grade 2x2 para listagem dinâmica de Forças, Fraquezas, Oportunidades e Ameaças.
+6. **5️⃣ Plano de Marketing:** Catálogo de produtos e serviços com controle unitário de custo de mercadoria, preço de venda sugerido, cálculo automático de margem bruta e definição de canais e estratégias promocionais.
+7. **6️⃣ Plano Operacional:** Desenho de processos diários sequenciais, descrição de layout físico, capacidade máxima/inicial e cadastro do quadro de pessoal operacional.
+8. **7️⃣ Plano Financeiro (Simulador de Viabilidade):** 
+   - **Tabelas de Investimento:** Cadastro dinâmico de Investimentos Fixos (com controle de anos de vida útil e depreciação mensal automática) e Investimentos Pré-operacionais.
+   - **Giro e Recursos:** Controle de capital de giro (estoque e caixa mínimo) e distribuição de fontes de captação (Recursos Próprios, Terceiros e Outros/BNDES), com alertas de inconformidade reativos.
+   - **Custos Operacionais Expandidos:** 12 contas fixas (aluguel, água/IPTU, energia, contador, pró-labore, etc.), integração da folha salarial com o acréscimo automático de **79% em encargos sociais** (padrão Sebrae) e depreciação mensal de ativos.
+   - **Demonstrativo DRE & Indicadores:** Exibição da DRE mensal e atualização em tempo real de Ponto de Equilíbrio, Lucratividade, ROI Anual e Prazo de Retorno (Payback).
+9. **📄 Relatório Final & Exportação:** Compilação formal de todas as informações em uma página de relatório limpa e executiva, com uma folha de estilos `@media print` otimizada para salvar em PDF de forma perfeita (ocultando menus, botões e barras laterais).
 
 ---
 
-# 4. Perfis de Usuário
+## 🛠️ Tecnologias Utilizadas
 
-## Empreendedor
-
-Usuário responsável pela criação do plano de negócios.
-
-### Necessidades
-
-* Organizar sua ideia.
-* Validar hipóteses.
-* Projetar resultados financeiros.
-* Gerar um documento profissional.
+- **Core:** React.js (iniciado via Vite)
+- **Linguagem:** JavaScript (ES6+)
+- **Estilização:** Vanilla CSS (Design system centralizado em `src/index.css` com variáveis customizadas para facilitar manutenção)
+- **Persistência:** Local Storage (auto-salvamento silencioso a cada modificação nos formulários)
+- **Segurança da Execução:** Configuração do servidor de desenvolvimento configurada para ignorar o monitoramento de planilhas locais abertas em segundo plano (evitando falhas por arquivos bloqueados pelo Excel).
 
 ---
 
-## Administrador
+## 📁 Estrutura de Pastas Chave
 
-Usuário responsável pela gestão da plataforma.
-
-### Necessidades
-
-* Acompanhar utilização do sistema.
-* Gerenciar usuários.
-* Monitorar planos criados.
-* Extrair indicadores gerais da plataforma.
-
----
-
-# 5. Jornada do Usuário
-
-## Etapa 1 – Acesso
-
-O usuário cria uma conta e realiza login.
-
-Ao acessar o sistema pela primeira vez, será convidado a criar seu primeiro plano de negócios.
-
----
-
-## Etapa 2 – Criação do Plano
-
-O usuário informa dados iniciais do empreendimento.
-
-Após a criação, o sistema apresenta uma trilha de desenvolvimento composta pelas etapas do plano de negócios.
-
-Cada etapa dapat ser preenchida independentemente e retomada posteriormente.
+```text
+/src
+  /components
+    Sidebar.jsx           # Navegação, planos e progresso
+    ContextHelp.jsx       # Dicas metodológicas e exemplos do Sebrae
+  /modules
+    DashboardModule.jsx   # Gráficos, KPIs e recomendações
+    IdentityModule.jsx    # Módulo 1 (Identidade e Sócios)
+    ExecutiveModule.jsx   # Módulo 2 (Resumo)
+    MarketModule.jsx      # Módulo 3 (Clientes, Concorrentes e Fornecedores)
+    SWOTModule.jsx        # Módulo 4 (FOFA)
+    MarketingModule.jsx   # Módulo 5 (Catálogo de Itens)
+    OperationalModule.jsx # Módulo 6 (Layout, Equipe e Processos)
+    FinancialModule.jsx   # Módulo 7 (Investimento, Giro, DRE, Dicas)
+    ReportModule.jsx      # Módulo 9 (Visão de Impressão e Créditos)
+  /context
+    PlanContext.jsx       # Motor financeiro e estado reativo
+  App.jsx                 # Controlador do fluxo de abas
+  index.css               # Estilos globais e variáveis de design
+  main.jsx
+```
 
 ---
 
-## Etapa 3 – Construção Guiada
-
-O usuário navega entre os módulos do plano.
-
-O sistema deve exibir:
-
-* Objetivo da seção;
-* Explicações resumidas;
-* Exemplos práticos;
-* Status de preenchimento.
-
-A experiência deve ser semelhante a um assistente passo a passo.
-
----
-
-## Etapa 4 – Acompanhamento
-
-O usuário acompanha a evolução do plano através de indicadores visuais.
-
-Exemplos:
-
-* Percentual concluído;
-* Seções pendentes;
-* Itens incompletos;
-* Alertas de inconsistência.
-
----
-
-## Etapa 5 – Consolidação
-
-Após concluir todas as etapas, o sistema gera automaticamente o Plano de Negócios completo em formato de relatório.
-
----
-
-# 6. Módulos do Sistema
-
-## Módulo 1 – Identidade do Negócio
-
-Permite ao usuário definir as características fundamentais do empreendimento.
-
-### Funcionalidades
-
-* Descrição do negócio;
-* Missão;
-* Visão;
-* Valores;
-* Objetivos estratégicos;
-* Diferenciais competitivos.
-
-### Resultado Esperado
-
-Clareza sobre a proposta do empreendimento.
-
----
-
-## Módulo 2 – Resumo Executivo
-
-Apresenta uma visão geral do negócio.
-
-### Funcionalidades
-
-* Descrição da oportunidade;
-* Problema a ser resolvido;
-* Solução oferecida;
-* Público-alvo;
-* Potencial de mercado.
-
-### Resultado Esperado
-
-Capacidade de apresentar o negócio de forma resumida para terceiros.
-
----
-
-## Módulo 3 – Análise de Mercado
-
-Permite avaliar o ambiente de atuação da empresa.
-
-### Funcionalidades
-
-* Definição do público-alvo;
-* Registro de concorrentes;
-* Comparação competitiva;
-* Identificação de fornecedores;
-* Mapeamento de oportunidades.
-
-### Resultado Esperado
-
-Compreensão do mercado e posicionamento estratégico.
-
----
-
-## Módulo 4 – Análise SWOT
-
-Permite mapear fatores internos e externos que impactam o negócio.
-
-### Funcionalidades
-
-* Registro de forças;
-* Registro de fraquezas;
-* Registro de oportunidades;
-* Registro de ameaças.
-
-### Resultado Esperado
-
-Identificação dos principais riscos e vantagens competitivas.
-
----
-
-## Módulo 5 – Plano de Marketing
-
-Permite estruturar as estratégias comerciais do empreendimento.
-
-### Funcionalidades
-
-* Definição de produtos e serviços;
-* Estratégia de preços;
-* Canais de venda;
-* Estratégias de divulgação;
-* Posicionamento de marca.
-
-### Resultado Esperado
-
-Planejamento das ações necessárias para alcançar clientes.
-
----
-
-## Módulo 6 – Plano Operacional
-
-Permite descrever o funcionamento do negócio.
-
-### Funcionalidades
-
-* Processos principais;
-* Estrutura física;
-* Recursos necessários;
-* Equipe operacional;
-* Fluxo de atividades.
-
-### Resultado Esperado
-
-Visão clara da operação diária da empresa.
-
----
-
-## Módulo 7 – Plano Financeiro
-
-Permite avaliar a viabilidade econômica do empreendimento.
-
-### Funcionalidades
-
-* Cadastro de investimentos iniciais;
-* Registro de despesas;
-* Registro de custos operacionais;
-* Projeção de receitas;
-* Simulação de cenários.
-
-### Resultado Esperado
-
-Compreensão da sustentabilidade financeira do negócio.
-
----
-
-## Módulo 8 – Dashboard
-
-Centraliza informações relevantes do plano.
-
-### Funcionalidades
-
-* Indicadores financeiros;
-* Indicadores de conclusão;
-* Resumo executivo visual;
-* Comparação entre cenários.
-
-### Resultado Esperado
-
-Visão rápida da situação geral do projeto.
-
----
-
-## Módulo 9 – Relatório Final
-
-Responsável pela consolidação automática das informações.
-
-### Funcionalidades
-
-* Geração do Plano de Negócios completo;
-* Exportação em PDF;
-* Visualização prévia;
-* Impressão.
-
-### Resultado Esperado
-
-Produção de um documento profissional pronto para apresentação.
-
----
-
-# 7. Funcionalidades Administrativas
-
-## Gestão de Usuários
-
-O administrador poderá:
-
-* Visualizar usuários cadastrados;
-* Ativar ou desativar contas;
-* Consultar histórico de acesso.
-
----
-
-## Gestão de Planos
-
-O administrador poderá:
-
-* Consultar planos criados;
-* Monitorar progresso dos usuários;
-* Visualizar estatísticas de utilização.
-
----
-
-## Painel Gerencial
-
-O administrador poderá acompanhar:
-
-* Quantidade de usuários;
-* Quantidade de planos criados;
-* Taxa de conclusão dos planos;
-* Módulos mais utilizados;
-* Indicadores de engajamento.
-
----
-
-# 8. Requisitos de Experiência do Usuário
-
-O sistema deverá:
-
-* Ser intuitivo para usuários sem conhecimento técnico;
-* Possuir interface responsiva;
-* Exibir progresso visual de conclusão;
-* Permitir salvamento automático;
-* Facilitar a navegação entre etapas;
-* Oferecer orientações contextuais durante o preenchimento.
-
----
-
-# 9. Critérios de Sucesso
-
-O produto será considerado bem-sucedido quando o usuário conseguir:
-
-1. Criar um plano de negócios sem auxílio externo;
-2. Completar todas as etapas da metodologia;
-3. Visualizar indicadores financeiros básicos;
-4. Gerar automaticamente um relatório final estruturado;
-5. Utilizar a plataforma como ferramenta de apoio à tomada de decisão.
+## ⚙️ Como Executar o Projeto Localmente
+
+### Pré-requisitos
+- Node.js (v24 ou superior recomendado)
+- npm (v11 ou superior)
+
+### Instalação
+1. Clone ou baixe este repositório no seu workspace.
+2. Abra um terminal na pasta raiz e instale as dependências:
+   ```bash
+   npm install
+   ```
+
+### Executar em Desenvolvimento
+Para rodar a aplicação localmente com HMR (Hot Module Replacement):
+1. Inicie o servidor Vite:
+   ```bash
+   npm run dev
+   ```
+2. Acesse a aplicação abrindo a URL informada no terminal em seu navegador (geralmente [http://localhost:5173](http://localhost:5173)).
