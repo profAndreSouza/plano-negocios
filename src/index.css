@@ -608,143 +608,201 @@ button, input, select, textarea {
   border-color: var(--primary);
 }
 
-/* SWOT matrix styling */
-.swot-container {
+/* SWOT matrix styling (FOFA 2x2 Grid aligning with reference image) */
+.swot-grid-layout {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  grid-template-columns: 80px 1fr 1fr;
+  grid-template-rows: auto 1fr 1fr;
+  gap: 16px;
+  width: 100%;
   margin-top: 12px;
 }
 
-.swot-box {
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  border: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  box-shadow: var(--shadow-sm);
-  min-height: 250px;
+.swot-grid-corner {
+  /* empty top-left cell */
 }
 
-.swot-box.strengths {
-  background-color: #f0fdf4; /* Emerald light background */
-  border-color: #bbf7d0;
-}
-.swot-box.weaknesses {
-  background-color: #fef2f2; /* Red light background */
-  border-color: #fecaca;
-}
-.swot-box.opportunities {
-  background-color: #f0f9ff; /* Sky blue light background */
-  border-color: #bae6fd;
-}
-.swot-box.threats {
-  background-color: #fffbeb; /* Amber light background */
-  border-color: #fef08a;
-}
-
-.swot-header {
+.swot-grid-header {
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  color: var(--text-heading);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+}
+.swot-grid-header.positive {
+  background-color: #e2e8f0;
+}
+.swot-grid-header.negative {
+  background-color: #cbd5e1;
 }
 
-.swot-badge {
-  padding: 4px 10px;
-  font-size: 11px;
+.swot-grid-row-header {
+  background-color: #e2e8f0;
+  color: var(--text-heading);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  text-align: center;
   font-weight: 800;
-  text-transform: uppercase;
-  border-radius: 20px;
+  font-size: 14px;
+}
+
+.swot-grid-row-header span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
   letter-spacing: 0.5px;
 }
 
-.swot-box.strengths .swot-badge { background-color: var(--success); color: white; }
-.swot-box.weaknesses .swot-badge { background-color: var(--danger); color: white; }
-.swot-box.opportunities .swot-badge { background-color: var(--secondary); color: white; }
-.swot-box.threats .swot-badge { background-color: var(--warning); color: white; }
-
-.swot-box-title {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--text-heading);
-}
-
-.swot-list {
+/* Quadrants styling matching the reference image colors */
+.swot-quadrant {
+  border-radius: var(--radius-md);
+  padding: 20px;
+  color: white;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  flex-grow: 1;
+  gap: 16px;
+  min-height: 250px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
 }
 
-.swot-item {
+.swot-quadrant.strengths {
+  background-color: #1fa2c6; /* Teal */
+}
+.swot-quadrant.weaknesses {
+  background-color: #829c38; /* Olive Green */
+}
+.swot-quadrant.opportunities {
+  background-color: #f69311; /* Orange */
+}
+.swot-quadrant.threats {
+  background-color: #df344f; /* Red */
+}
+
+/* Title row in each quadrant */
+.quadrant-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 8px;
+}
+
+.quadrant-letter {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 0.8;
+  color: white;
+}
+
+.quadrant-meta {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.quadrant-eng {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.quadrant-pt {
+  font-size: 13px;
+  opacity: 0.9;
+  font-weight: 600;
+}
+
+.swot-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 180px;
+}
+
+.swot-item-pill {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
-  padding: 10px 14px;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: var(--text-heading);
+  padding: 8px 12px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
   font-size: 13px;
-  font-weight: 500;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-  animation: slideIn 0.2s ease;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-.btn-delete-swot {
+.btn-delete-swot-pill {
   background: none;
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2px;
+  padding: 0 2px;
   transition: var(--transition);
 }
-.btn-delete-swot:hover {
+.btn-delete-swot-pill:hover {
   color: var(--danger);
 }
 
-.swot-input-row {
+.swot-add-pill-row {
   display: flex;
   gap: 8px;
+  margin-top: auto;
 }
 
-.swot-input {
+.swot-pill-input {
   flex-grow: 1;
   padding: 8px 12px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
   font-size: 13px;
   outline: none;
-}
-.swot-input:focus {
-  border-color: var(--primary);
-}
-
-.btn-add-swot {
-  padding: 8px 14px;
-  background-color: var(--text-heading);
-  color: white;
-  border: none;
-  border-radius: var(--radius-sm);
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
   transition: var(--transition);
 }
-.swot-box.strengths .btn-add-swot { background-color: var(--success); }
-.swot-box.weaknesses .btn-add-swot { background-color: var(--danger); }
-.swot-box.opportunities .btn-add-swot { background-color: var(--secondary); }
-.swot-box.threats .btn-add-swot { background-color: var(--warning); }
+.swot-pill-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.swot-pill-input:focus {
+  background-color: white;
+  color: var(--text-heading);
+  border-color: white;
+}
 
-.swot-box.strengths .btn-add-swot:hover { filter: brightness(0.9); }
-.swot-box.weaknesses .btn-add-swot:hover { filter: brightness(0.9); }
-.swot-box.opportunities .btn-add-swot:hover { filter: brightness(0.9); }
-.swot-box.threats .btn-add-swot:hover { filter: brightness(0.9); }
+.btn-add-swot-pill {
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  color: var(--text-heading);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+.btn-add-swot-pill:hover {
+  background-color: var(--bg-main);
+}
 
 
 /* Financial inputs layout */

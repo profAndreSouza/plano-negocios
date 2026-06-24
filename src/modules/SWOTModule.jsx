@@ -49,22 +49,33 @@ export default function SWOTModule() {
         </p>
       </div>
 
-      <div className="swot-container">
-        {/* STRENGTHS */}
-        <div className="swot-box strengths">
-          <div className="swot-header">
-            <h3 className="swot-box-title">Forças (Strengths)</h3>
-            <span className="swot-badge">Interno</span>
+      <div className="swot-grid-layout">
+        {/* Row 1: Headers */}
+        <div className="swot-grid-corner"></div>
+        <div className="swot-grid-header positive">Fatores positivos</div>
+        <div className="swot-grid-header negative">Fatores negativos</div>
+
+        {/* Row 2: Internos */}
+        <div className="swot-grid-row-header">
+          <span>Fatores internos</span>
+        </div>
+
+        {/* Strengths (S) */}
+        <div className="swot-quadrant strengths">
+          <div className="quadrant-title-row">
+            <span className="quadrant-letter">S</span>
+            <div className="quadrant-meta">
+              <span className="quadrant-eng">Strengths</span>
+              <span className="quadrant-pt">(força)</span>
+            </div>
           </div>
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '-8px' }}>
-            Vantagens internas que você tem controle direto (Ex: equipe dedicada, tecnologia própria, boa localização).
-          </p>
-          <div className="swot-list">
+          
+          <div className="swot-items-list">
             {(swot.strengths || []).map((item, index) => (
-              <div key={index} className="swot-item">
+              <div key={index} className="swot-item-pill">
                 <span>{item}</span>
                 <button
-                  className="btn-delete-swot"
+                  className="btn-delete-swot-pill"
                   onClick={() => handleRemoveItem('strengths', index)}
                   title="Excluir item"
                 >
@@ -73,44 +84,47 @@ export default function SWOTModule() {
               </div>
             ))}
             {(swot.strengths || []).length === 0 && (
-              <div style={{ fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '13px', textAlign: 'center', margin: 'auto 0' }}>
+              <div style={{ fontStyle: 'italic', opacity: 0.8, fontSize: '13px', textAlign: 'center', margin: 'auto 0' }}>
                 Nenhuma força listada.
               </div>
             )}
           </div>
-          <div className="swot-input-row">
+
+          <div className="swot-add-pill-row">
             <input
               type="text"
-              className="swot-input"
-              placeholder="Ex: Marca registrada forte..."
+              className="swot-pill-input"
+              placeholder="Adicionar força..."
               value={strengthInput}
               onChange={(e) => setStrengthInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleAddItem('strengths', strengthInput, setStrengthInput)}
             />
             <button
-              className="btn-add-swot"
+              className="btn-add-swot-pill"
               onClick={() => handleAddItem('strengths', strengthInput, setStrengthInput)}
+              title="Adicionar"
             >
               +
             </button>
           </div>
         </div>
 
-        {/* WEAKNESSES */}
-        <div className="swot-box weaknesses">
-          <div className="swot-header">
-            <h3 className="swot-box-title">Fraquezas (Weaknesses)</h3>
-            <span className="swot-badge">Interno</span>
+        {/* Weaknesses (W) */}
+        <div className="swot-quadrant weaknesses">
+          <div className="quadrant-title-row">
+            <span className="quadrant-letter">W</span>
+            <div className="quadrant-meta">
+              <span className="quadrant-eng">Weaknesses</span>
+              <span className="quadrant-pt">(fraquezas)</span>
+            </div>
           </div>
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '-8px' }}>
-            Desvantagens internas que precisam ser melhoradas ou corrigidas (Ex: equipe inexperiente, orçamento apertado).
-          </p>
-          <div className="swot-list">
+
+          <div className="swot-items-list">
             {(swot.weaknesses || []).map((item, index) => (
-              <div key={index} className="swot-item">
+              <div key={index} className="swot-item-pill">
                 <span>{item}</span>
                 <button
-                  className="btn-delete-swot"
+                  className="btn-delete-swot-pill"
                   onClick={() => handleRemoveItem('weaknesses', index)}
                   title="Excluir item"
                 >
@@ -119,44 +133,52 @@ export default function SWOTModule() {
               </div>
             ))}
             {(swot.weaknesses || []).length === 0 && (
-              <div style={{ fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '13px', textAlign: 'center', margin: 'auto 0' }}>
+              <div style={{ fontStyle: 'italic', opacity: 0.8, fontSize: '13px', textAlign: 'center', margin: 'auto 0' }}>
                 Nenhuma fraqueza listada.
               </div>
             )}
           </div>
-          <div className="swot-input-row">
+
+          <div className="swot-add-pill-row">
             <input
               type="text"
-              className="swot-input"
-              placeholder="Ex: Recursos financeiros iniciais limitados..."
+              className="swot-pill-input"
+              placeholder="Adicionar fraqueza..."
               value={weaknessInput}
               onChange={(e) => setWeaknessInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleAddItem('weaknesses', weaknessInput, setWeaknessInput)}
             />
             <button
-              className="btn-add-swot"
+              className="btn-add-swot-pill"
               onClick={() => handleAddItem('weaknesses', weaknessInput, setWeaknessInput)}
+              title="Adicionar"
             >
               +
             </button>
           </div>
         </div>
 
-        {/* OPPORTUNITIES */}
-        <div className="swot-box opportunities">
-          <div className="swot-header">
-            <h3 className="swot-box-title">Oportunidades (Opportunities)</h3>
-            <span className="swot-badge">Externo</span>
+        {/* Row 3: Externos */}
+        <div className="swot-grid-row-header">
+          <span>Fatores externos</span>
+        </div>
+
+        {/* Opportunities (O) */}
+        <div className="swot-quadrant opportunities">
+          <div className="quadrant-title-row">
+            <span className="quadrant-letter">O</span>
+            <div className="quadrant-meta">
+              <span className="quadrant-eng">Opportunities</span>
+              <span className="quadrant-pt">(oportunidades)</span>
+            </div>
           </div>
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '-8px' }}>
-            Fatores externos do mercado que você pode aproveitar para crescer (Ex: novas tecnologias, mudanças de hábito, leis favoráveis).
-          </p>
-          <div className="swot-list">
+
+          <div className="swot-items-list">
             {(swot.opportunities || []).map((item, index) => (
-              <div key={index} className="swot-item">
+              <div key={index} className="swot-item-pill">
                 <span>{item}</span>
                 <button
-                  className="btn-delete-swot"
+                  className="btn-delete-swot-pill"
                   onClick={() => handleRemoveItem('opportunities', index)}
                   title="Excluir item"
                 >
@@ -165,44 +187,47 @@ export default function SWOTModule() {
               </div>
             ))}
             {(swot.opportunities || []).length === 0 && (
-              <div style={{ fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '13px', textAlign: 'center', margin: 'auto 0' }}>
+              <div style={{ fontStyle: 'italic', opacity: 0.8, fontSize: '13px', textAlign: 'center', margin: 'auto 0' }}>
                 Nenhuma oportunidade listada.
               </div>
             )}
           </div>
-          <div className="swot-input-row">
+
+          <div className="swot-add-pill-row">
             <input
               type="text"
-              className="swot-input"
-              placeholder="Ex: Expansão imobiliária na região..."
+              className="swot-pill-input"
+              placeholder="Adicionar oportunidade..."
               value={opportunityInput}
               onChange={(e) => setOpportunityInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleAddItem('opportunities', opportunityInput, setOpportunityInput)}
             />
             <button
-              className="btn-add-swot"
+              className="btn-add-swot-pill"
               onClick={() => handleAddItem('opportunities', opportunityInput, setOpportunityInput)}
+              title="Adicionar"
             >
               +
             </button>
           </div>
         </div>
 
-        {/* THREATS */}
-        <div className="swot-box threats">
-          <div className="swot-header">
-            <h3 className="swot-box-title">Ameaças (Threats)</h3>
-            <span className="swot-badge">Externo</span>
+        {/* Threats (T) */}
+        <div className="swot-quadrant threats">
+          <div className="quadrant-title-row">
+            <span className="quadrant-letter">T</span>
+            <div className="quadrant-meta">
+              <span className="quadrant-eng">Threats</span>
+              <span className="quadrant-pt">(ameaças)</span>
+            </div>
           </div>
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '-8px' }}>
-            Acontecimentos externos fora do seu controle que geram riscos ao negócio (Ex: novos concorrentes gigantes, inflação).
-          </p>
-          <div className="swot-list">
+
+          <div className="swot-items-list">
             {(swot.threats || []).map((item, index) => (
-              <div key={index} className="swot-item">
+              <div key={index} className="swot-item-pill">
                 <span>{item}</span>
                 <button
-                  className="btn-delete-swot"
+                  className="btn-delete-swot-pill"
                   onClick={() => handleRemoveItem('threats', index)}
                   title="Excluir item"
                 >
@@ -211,23 +236,25 @@ export default function SWOTModule() {
               </div>
             ))}
             {(swot.threats || []).length === 0 && (
-              <div style={{ fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '13px', textAlign: 'center', margin: 'auto 0' }}>
+              <div style={{ fontStyle: 'italic', opacity: 0.8, fontSize: '13px', textAlign: 'center', margin: 'auto 0' }}>
                 Nenhuma ameaça listada.
               </div>
             )}
           </div>
-          <div className="swot-input-row">
+
+          <div className="swot-add-pill-row">
             <input
               type="text"
-              className="swot-input"
-              placeholder="Ex: Novos regulamentos de licença de funcionamento..."
+              className="swot-pill-input"
+              placeholder="Adicionar ameaça..."
               value={threatInput}
               onChange={(e) => setThreatInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleAddItem('threats', threatInput, setThreatInput)}
             />
             <button
-              className="btn-add-swot"
+              className="btn-add-swot-pill"
               onClick={() => handleAddItem('threats', threatInput, setThreatInput)}
+              title="Adicionar"
             >
               +
             </button>

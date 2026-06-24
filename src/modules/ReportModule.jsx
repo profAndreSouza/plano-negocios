@@ -286,45 +286,120 @@ export default function ReportModule() {
             <h2 className="report-section-title">Análise Estratégica SWOT (FOFA)</h2>
           </div>
 
-          <div className="report-swot-grid">
-            <div className="report-swot-card strengths">
-              <h4 className="report-swot-title">Forças</h4>
-              <ul className="report-swot-list">
-                {swot.strengths && swot.strengths.length > 0
-                  ? swot.strengths.map((item, i) => <li key={i}>{item}</li>)
-                  : <li>Nenhuma listada</li>
-                }
-              </ul>
+          <div className="swot-grid-layout" style={{ marginTop: '20px' }}>
+            {/* Row 1: Headers */}
+            <div className="swot-grid-corner"></div>
+            <div className="swot-grid-header positive">Fatores positivos</div>
+            <div className="swot-grid-header negative">Fatores negativos</div>
+
+            {/* Row 2: Internos */}
+            <div className="swot-grid-row-header">
+              <span>Fatores internos</span>
             </div>
 
-            <div className="report-swot-card weaknesses">
-              <h4 className="report-swot-title">Fraquezas</h4>
-              <ul className="report-swot-list">
-                {swot.weaknesses && swot.weaknesses.length > 0
-                  ? swot.weaknesses.map((item, i) => <li key={i}>{item}</li>)
-                  : <li>Nenhuma listada</li>
-                }
-              </ul>
+            {/* Strengths (S) */}
+            <div className="swot-quadrant strengths" style={{ minHeight: '180px' }}>
+              <div className="quadrant-title-row">
+                <span className="quadrant-letter">S</span>
+                <div className="quadrant-meta">
+                  <span className="quadrant-eng">Strengths</span>
+                  <span className="quadrant-pt">(força)</span>
+                </div>
+              </div>
+              
+              <div className="swot-items-list" style={{ maxHeight: 'none' }}>
+                {swot.strengths && swot.strengths.length > 0 ? (
+                  swot.strengths.map((item, i) => (
+                    <div key={i} className="swot-item-pill">
+                      <span>{item}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ fontStyle: 'italic', opacity: 0.8, fontSize: '13px', textAlign: 'center', margin: 'auto 0' }}>
+                    Nenhuma força listada.
+                  </div>
+                )}
+              </div>
             </div>
 
-            <div className="report-swot-card opportunities">
-              <h4 className="report-swot-title">Oportunidades</h4>
-              <ul className="report-swot-list">
-                {swot.opportunities && swot.opportunities.length > 0
-                  ? swot.opportunities.map((item, i) => <li key={i}>{item}</li>)
-                  : <li>Nenhuma listada</li>
-                }
-              </ul>
+            {/* Weaknesses (W) */}
+            <div className="swot-quadrant weaknesses" style={{ minHeight: '180px' }}>
+              <div className="quadrant-title-row">
+                <span className="quadrant-letter">W</span>
+                <div className="quadrant-meta">
+                  <span className="quadrant-eng">Weaknesses</span>
+                  <span className="quadrant-pt">(fraquezas)</span>
+                </div>
+              </div>
+
+              <div className="swot-items-list" style={{ maxHeight: 'none' }}>
+                {swot.weaknesses && swot.weaknesses.length > 0 ? (
+                  swot.weaknesses.map((item, i) => (
+                    <div key={i} className="swot-item-pill">
+                      <span>{item}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ fontStyle: 'italic', opacity: 0.8, fontSize: '13px', textAlign: 'center', margin: 'auto 0' }}>
+                    Nenhuma fraqueza listada.
+                  </div>
+                )}
+              </div>
             </div>
 
-            <div className="report-swot-card threats">
-              <h4 className="report-swot-title">Ameaças</h4>
-              <ul className="report-swot-list">
-                {swot.threats && swot.threats.length > 0
-                  ? swot.threats.map((item, i) => <li key={i}>{item}</li>)
-                  : <li>Nenhuma listada</li>
-                }
-              </ul>
+            {/* Row 3: Externos */}
+            <div className="swot-grid-row-header">
+              <span>Fatores externos</span>
+            </div>
+
+            {/* Opportunities (O) */}
+            <div className="swot-quadrant opportunities" style={{ minHeight: '180px' }}>
+              <div className="quadrant-title-row">
+                <span className="quadrant-letter">O</span>
+                <div className="quadrant-meta">
+                  <span className="quadrant-eng">Opportunities</span>
+                  <span className="quadrant-pt">(oportunidades)</span>
+                </div>
+              </div>
+
+              <div className="swot-items-list" style={{ maxHeight: 'none' }}>
+                {swot.opportunities && swot.opportunities.length > 0 ? (
+                  swot.opportunities.map((item, i) => (
+                    <div key={i} className="swot-item-pill">
+                      <span>{item}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ fontStyle: 'italic', opacity: 0.8, fontSize: '13px', textAlign: 'center', margin: 'auto 0' }}>
+                    Nenhuma oportunidade listada.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Threats (T) */}
+            <div className="swot-quadrant threats" style={{ minHeight: '180px' }}>
+              <div className="quadrant-title-row">
+                <span className="quadrant-letter">T</span>
+                <div className="quadrant-meta">
+                  <span className="quadrant-eng">Threats</span>
+                  <span className="quadrant-pt">(ameaças)</span>
+                </div>
+              </div>
+
+              <div className="swot-items-list" style={{ maxHeight: 'none' }}>
+                {swot.threats && swot.threats.length > 0 ? (
+                  swot.threats.map((item, i) => (
+                    <div key={i} className="swot-item-pill">
+                      <span>{item}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ fontStyle: 'italic', opacity: 0.8, fontSize: '13px', textAlign: 'center', margin: 'auto 0' }}>
+                    Nenhuma ameaça listada.
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
