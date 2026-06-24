@@ -161,7 +161,7 @@ export default function FinancialModule() {
               const dep = sub / (life * 12);
               return (
                 <div key={item.id} className="builder-item-row" style={{ padding: '12px' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '2.5fr 1fr 1fr 1fr 1fr 1.2fr', gap: '12px', width: '100%', alignItems: 'end' }}>
+                  <div className="fixed-investment-grid">
                     <div className="form-group">
                       <label className="form-label" style={{ fontSize: '11px' }}>Descrição do Item</label>
                       <input
@@ -242,7 +242,7 @@ export default function FinancialModule() {
 
         {/* Pre-operational Investments Table */}
         <div className="list-builder" style={{ marginTop: '16px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div className="section-header-row" style={{ marginBottom: '4px' }}>
             <h4 style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-heading)' }}>Investimentos Pré-operacionais (Reformas, Registro, Marketing de Lançamento)</h4>
             <button type="button" className="btn-add-row" onClick={addPreOperational}>
               + Adicionar Item Pré-op
@@ -252,7 +252,7 @@ export default function FinancialModule() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {(financial.preOperational || []).map((item) => (
               <div key={item.id} className="builder-item-row" style={{ padding: '12px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '4fr 2fr', gap: '16px', width: '100%', alignItems: 'end' }}>
+                <div className="pre-op-investment-grid">
                   <div className="form-group">
                     <label className="form-label" style={{ fontSize: '12px' }}>Descrição do Custo</label>
                     <input
@@ -398,15 +398,13 @@ export default function FinancialModule() {
               )}
 
               <div 
+                className="financial-summary-row"
                 style={{ 
                   marginTop: '24px', 
                   padding: '20px', 
                   backgroundColor: 'var(--secondary-light)', 
                   borderRadius: 'var(--radius-md)', 
-                  border: '1px solid rgba(2,132,199,0.1)',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
+                  border: '1px solid rgba(2,132,199,0.1)'
                 }}
               >
                 <div>
@@ -507,14 +505,13 @@ export default function FinancialModule() {
         </div>
 
         <div 
+          className="financial-summary-row"
           style={{ 
             marginTop: '16px', 
             padding: '16px', 
             backgroundColor: 'var(--bg-main)', 
             borderRadius: 'var(--radius-md)',
             border: '1px solid var(--border)',
-            display: 'flex',
-            justifyContent: 'space-between',
             fontSize: '14px'
           }}
         >
@@ -525,7 +522,7 @@ export default function FinancialModule() {
             </span>
           </div>
           <div>
-            <span style={{ fontWeight: '700', color: 'var(--text-heading)' }}>Custos Variáveis Mensais (CMV + Imposto + Comissões):</span>
+            <span style={{ fontWeight: '700', color: 'var(--text-heading)' }}>Custos Variáveis Mensais:</span>
             <span style={{ marginLeft: '8px', fontWeight: '800', color: 'var(--danger)' }}>
               {formatCurrency(calculated.totalVariableCosts)}
             </span>
@@ -543,7 +540,7 @@ export default function FinancialModule() {
         </div>
 
         {/* Personnel Payroll & Social Charges Block */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', alignItems: 'start' }}>
+        <div className="payroll-grid">
           <div 
             style={{ 
               padding: '20px', 
@@ -644,15 +641,13 @@ export default function FinancialModule() {
         </div>
 
         <div 
+          className="financial-summary-row"
           style={{ 
             marginTop: '16px', 
             padding: '16px', 
             backgroundColor: 'var(--bg-main)', 
             borderRadius: 'var(--radius-md)',
-            border: '1px dashed var(--border)',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
+            border: '1px dashed var(--border)'
           }}
         >
           <span style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-heading)' }}>Custo Fixo Mensal Total (Pessoal + Depreciação + Despesas):</span>

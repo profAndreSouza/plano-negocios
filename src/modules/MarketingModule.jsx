@@ -70,7 +70,7 @@ export default function MarketingModule() {
 
       {/* Products & Services List Builder */}
       <div className="list-builder">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="section-header-row">
           <div>
             <h3 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-heading)' }}>Produtos e Serviços Cadastrados <span className="required-star">*</span></h3>
             <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Cadastre o catálogo inicial. Os valores inseridos serão usados para calcular a projeção financeira.</p>
@@ -89,7 +89,7 @@ export default function MarketingModule() {
 
             return (
               <div key={product.id} className="builder-item-row" style={{ gridTemplateColumns: '1fr' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 2fr 1fr 1fr 1fr 1fr', gap: '16px', alignItems: 'end' }}>
+                <div className="product-grid">
                   
                   <div className="form-group">
                     <label className="form-label">Nome do Item</label>

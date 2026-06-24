@@ -164,7 +164,7 @@ export default function IdentityModule() {
       </div>
 
       <div className="list-builder" style={{ marginTop: '16px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="section-header-row">
           <div>
             <h3 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-heading)' }}>Quadro de Sócios e Empreendedores</h3>
             <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Registre a equipe gestora, suas funções e experiências profissionais.</p>
@@ -177,7 +177,7 @@ export default function IdentityModule() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {(identity.partners || []).map((partner) => (
             <div key={partner.id} className="builder-item-row">
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 2fr', gap: '16px', width: '100%' }}>
+              <div className="partner-grid">
                 <div className="form-group">
                   <label className="form-label">Nome Completo</label>
                   <input

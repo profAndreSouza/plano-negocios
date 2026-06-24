@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { usePlan } from '../context/PlanContext';
 
-export default function Sidebar() {
+export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
   const {
     plans,
     activePlanId,
@@ -61,11 +61,18 @@ export default function Sidebar() {
 
   return (
     <>
-      <aside className="sidebar">
+      <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <div className="logo-container">
             <div className="logo-icon">BP</div>
             <div className="logo-text">Business Plan Builder</div>
+            <button 
+              className="btn-close-sidebar" 
+              onClick={() => setIsSidebarOpen(false)}
+              title="Fechar Menu"
+            >
+              &times;
+            </button>
           </div>
           
           <div className="plan-selector-container">
@@ -107,7 +114,10 @@ export default function Sidebar() {
               <div
                 key={item.id}
                 className={`nav-item ${isActive ? 'active' : ''}`}
-                onClick={() => setActiveTab(item.id)}
+                onClick={() => {
+                  setActiveTab(item.id);
+                  setIsSidebarOpen(false);
+                }}
               >
                 <span className="nav-badge-num">{item.badge}</span>
                 <span>{item.label}</span>

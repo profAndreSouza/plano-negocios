@@ -27,14 +27,7 @@ export default function ReportModule() {
 
       {/* Print Action Bar (Hidden during print) */}
       <div
-        className="content-card"
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '20px 32px',
-          borderLeft: '4px solid var(--primary)'
-        }}
+        className="content-card report-action-card"
       >
         <div>
           <h3 style={{ fontSize: '16px', fontWeight: '800', color: 'var(--text-heading)' }}>
@@ -570,7 +563,7 @@ export default function ReportModule() {
             <h2 className="report-section-title">Plano Financeiro e Demonstrativo de Viabilidade</h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '20px' }}>
             <div>
               <h4 style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-heading)', marginBottom: '8px' }}>Detalhamento do Investimento Inicial</h4>
               <div className="report-table-wrapper">

@@ -116,7 +116,7 @@ export default function OperationalModule() {
 
       {/* Processes Table Builder */}
       <div className="list-builder" style={{ marginTop: '16px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="section-header-row">
           <div>
             <h3 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-heading)' }}>Mapeamento de Processos Operacionais</h3>
             <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Mapeie as etapas operacionais sequenciais mais importantes do dia a dia (o que fazer, como fazer, quem faz).</p>
@@ -129,7 +129,7 @@ export default function OperationalModule() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {(operational.processes || []).map((proc) => (
             <div key={proc.id} className="builder-item-row" style={{ gridTemplateColumns: '1fr' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '80px 3fr 1.5fr auto', gap: '16px', alignItems: 'end' }}>
+              <div className="process-grid">
                 
                 <div className="form-group">
                   <label className="form-label">Etapa nº</label>
@@ -188,7 +188,7 @@ export default function OperationalModule() {
 
       {/* Personnel Builder */}
       <div className="list-builder" style={{ marginTop: '24px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="section-header-row">
           <div>
             <h3 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-heading)' }}>Necessidade de Recursos Humanos (Funcionários)</h3>
             <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Registre a folha de pagamento da equipe operacional direta. Os valores alimentam os Custos Fixos mensais.</p>
@@ -206,7 +206,7 @@ export default function OperationalModule() {
 
             return (
               <div key={person.id} className="builder-item-row" style={{ gridTemplateColumns: '1fr' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1.5fr auto', gap: '16px', alignItems: 'end' }}>
+                <div className="personnel-grid">
                   
                   <div className="form-group">
                     <label className="form-label">Cargo / Função</label>

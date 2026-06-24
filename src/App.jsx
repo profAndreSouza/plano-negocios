@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PlanProvider, usePlan } from './context/PlanContext';
 import Sidebar from './components/Sidebar';
 import ContextHelp from './components/ContextHelp';
@@ -11,9 +11,11 @@ import MarketingModule from './modules/MarketingModule';
 import OperationalModule from './modules/OperationalModule';
 import FinancialModule from './modules/FinancialModule';
 import ReportModule from './modules/ReportModule';
+import MobileNextButton from './components/MobileNextButton';
 
 function AppContent() {
   const { activeTab, isHelpOpen, setIsHelpOpen, toasts, activePlan } = usePlan();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   if (!activePlan) {
     return (
@@ -77,7 +79,30 @@ function AppContent() {
 
   return (
     <div className="app-container">
-      <Sidebar />
+      {/* Mobile Top Header */}
+      <header className="mobile-top-bar">
+        <button 
+          className="menu-toggle-btn" 
+          onClick={() => setIsSidebarOpen(true)}
+          title="Menu de Navegação"
+        >
+          ☰
+        </button>
+        <span className="mobile-logo-text">BP Builder</span>
+        <button 
+          className="mobile-help-toggle" 
+          onClick={() => setIsHelpOpen(!isHelpOpen)}
+          title="Alternar Ajuda"
+        >
+          💡
+        </button>
+      </header>
+
+      {isSidebarOpen && (
+        <div className="sidebar-backdrop" onClick={() => setIsSidebarOpen(false)} />
+      )}
+
+      <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
       <div className="main-wrapper">
         <main className="content-pane">
           <header className="module-header">
@@ -99,6 +124,7 @@ function AppContent() {
           <div style={{ flexGrow: 1 }}>
             {renderActiveModule()}
           </div>
+          <MobileNextButton />
         </main>
         <ContextHelp />
       </div>

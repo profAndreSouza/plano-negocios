@@ -96,10 +96,10 @@ export default function MarketModule() {
 
       {/* Competitors Matrix */}
       <div className="list-builder" style={{ marginTop: '16px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="section-header-row">
           <div>
-            <h3 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-heading)' }}>Matriz de Análise da Concorrência</h3>
-            <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Mapeie seus principais concorrentes diretos e avalie os atributos de cada um.</p>
+            <h3 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-heading)' }}>Análise de Concorrência</h3>
+            <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Avalie seus principais concorrentes e identifique as suas forças e fraquezas frente ao mercado.</p>
           </div>
           <button type="button" className="btn-add-row" onClick={addCompetitor}>
             + Adicionar Concorrente
@@ -202,7 +202,7 @@ export default function MarketModule() {
 
       {/* Suppliers */}
       <div className="list-builder" style={{ marginTop: '24px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="section-header-row">
           <div>
             <h3 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-heading)' }}>Mapeamento de Fornecedores</h3>
             <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Liste os parceiros comerciais chaves que fornecerão mercadorias, insumos ou equipamentos.</p>
@@ -215,7 +215,7 @@ export default function MarketModule() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {(market.suppliers || []).map((sup) => (
             <div key={sup.id} className="builder-item-row">
-              <div style={{ display: 'grid', gridTemplateColumns: '2fr 2fr 2fr 1fr', gap: '16px', width: '100%' }}>
+              <div className="supplier-grid">
                 <div className="form-group">
                   <label className="form-label">Nome do Fornecedor / Empresa</label>
                   <input
