@@ -596,13 +596,14 @@ export default function ReportModule() {
           </div>
 
           <div style={{ marginTop: '20px' }}>
-            <h4 style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-heading)', marginBottom: '8px' }}>DRE Simplificado Mensal (Demonstrativo de Resultado do Exercício)</h4>
+            <h4 style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-heading)', marginBottom: '8px' }}>DRE Simplificado (Demonstrativo de Resultado do Exercício)</h4>
             <div className="report-table-wrapper">
               <table className="report-table">
                 <thead>
                   <tr>
                     <th>Etapas do Resultado Operacional</th>
-                    <th style={{ textAlign: 'right' }}>Valor Projetado (Mensal)</th>
+                    <th style={{ textAlign: 'right', width: '22%' }}>Projeção Mensal</th>
+                    <th style={{ textAlign: 'right', width: '22%' }}>Projeção Anual (12 Meses)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -612,6 +613,7 @@ export default function ReportModule() {
                       <tr key={idx} style={{ fontWeight: isTotal ? '700' : 'normal', backgroundColor: isTotal ? 'var(--bg-main)' : 'white' }}>
                         <td>{row.label}</td>
                         <td style={{ textAlign: 'right', fontWeight: '700' }}>{formatCurrency(row.value)}</td>
+                        <td style={{ textAlign: 'right', fontWeight: '700' }}>{formatCurrency(row.value * 12)}</td>
                       </tr>
                     );
                   })}

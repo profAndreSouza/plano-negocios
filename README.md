@@ -4,6 +4,8 @@ O **Business Plan Builder** é uma plataforma web moderna e interativa de tema c
 
 A aplicação transforma o processo tradicional de planejamento (geralmente feito em planilhas e documentos extensos e desconexos) em uma jornada fluida, visual e integrada, permitindo o salvamento reativo de progresso e simulações simultâneas de viabilidade.
 
+Acesse: https://plano-negocios.vercel.app/
+
 ---
 
 ## 🚀 Funcionalidades Principais
