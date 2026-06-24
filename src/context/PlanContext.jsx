@@ -245,10 +245,10 @@ export const PlanProvider = ({ children }) => {
     sections.market = Math.round((filledMarket / marketFields.length) * 100);
 
     // SWOT progress
-    const swotCount = 
-      plan.swot.strengths.length + 
-      plan.swot.weaknesses.length + 
-      plan.swot.opportunities.length + 
+    const swotCount =
+      plan.swot.strengths.length +
+      plan.swot.weaknesses.length +
+      plan.swot.opportunities.length +
       plan.swot.threats.length;
     sections.swot = swotCount >= 4 ? 100 : Math.round((swotCount / 4) * 100);
 
@@ -307,8 +307,8 @@ export const PlanProvider = ({ children }) => {
     );
 
     // 3. Working Capital
-    const workingCapitalTotal = 
-      (Number(plan.financial.workingCapitalStock) || 0) + 
+    const workingCapitalTotal =
+      (Number(plan.financial.workingCapitalStock) || 0) +
       (Number(plan.financial.workingCapitalCash) || 0);
 
     // 4. Total Initial Investment
@@ -327,10 +327,10 @@ export const PlanProvider = ({ children }) => {
     // 6. Variable Costs
     const taxRate = Number(plan.financial.taxRate) || 0;
     const commissionRate = Number(plan.financial.commissionRate) || 0;
-    
+
     const taxesTotal = projectedRevenue * (taxRate / 100);
     const commissionsTotal = projectedRevenue * (commissionRate / 100);
-    
+
     const totalVariableCosts = costOfGoodsSold + taxesTotal + commissionsTotal;
 
     // Contribution Margin
@@ -345,7 +345,7 @@ export const PlanProvider = ({ children }) => {
       0
     );
     const payrollTotal = basePayrollTotal * (1 + payrollChargesRate / 100);
-    
+
     // Depreciation of Fixed Investments (Calculated monthly based on usefulLife in years, default 10)
     const depreciationTotal = plan.financial.fixedInvestments.reduce((sum, item) => {
       const value = Number(item.value) || 0;
@@ -365,7 +365,7 @@ export const PlanProvider = ({ children }) => {
     // 8. Profitability Metrics
     const netProfit = projectedRevenue - totalVariableCosts - totalFixedCosts;
     const profitabilityPct = projectedRevenue > 0 ? (netProfit / projectedRevenue) * 100 : 0;
-    
+
     // ROI = (Annual Profit / Total Investment) * 100
     const annualProfit = netProfit * 12;
     const roiPct = totalInvestment > 0 ? (annualProfit / totalInvestment) * 100 : 0;
@@ -386,7 +386,7 @@ export const PlanProvider = ({ children }) => {
       { label: `(-) Gastos com Pessoal (Salários + Encargos de ${payrollChargesRate}%)`, value: payrollTotal, type: 'item' },
       { label: '(-) Depreciação Mensal de Ativos', value: depreciationTotal, type: 'item' },
       { label: '(-) Outros Custos Operacionais Fixos', value: otherFixedCostsTotal, type: 'item' },
-      { label: '(=) Lucro Líquido Mensal', value: netProfit, type: 'final' }
+      { label: '(=) Lucro Líquido', value: netProfit, type: 'final' }
     ];
 
     return {
