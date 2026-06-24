@@ -24,14 +24,14 @@ export default function ReportModule() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      
+
       {/* Print Action Bar (Hidden during print) */}
-      <div 
-        className="content-card" 
-        style={{ 
-          flexDirection: 'row', 
-          justifyContent: 'space-between', 
-          alignItems: 'center', 
+      <div
+        className="content-card"
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           padding: '20px 32px',
           borderLeft: '4px solid var(--primary)'
         }}
@@ -51,7 +51,7 @@ export default function ReportModule() {
 
       {/* Printable Report Document */}
       <article className="report-view">
-        
+
         {/* Cover Page */}
         <section className="report-cover">
           <span className="report-cover-tag">Plano de Negócios</span>
@@ -61,13 +61,13 @@ export default function ReportModule() {
           <p className="report-cover-subtitle">
             Estudo de viabilidade mercadológica, operacional e financeira do empreendimento.
           </p>
-          
+
           <div className="report-meta-grid">
             <div className="report-meta-item">
               <span className="report-meta-label">Elaborado por:</span>
               <span className="report-meta-val">
-                {identity.partners && identity.partners.length > 0 
-                  ? identity.partners.map((p) => p.name).join(', ') 
+                {identity.partners && identity.partners.length > 0
+                  ? identity.partners.map((p) => p.name).join(', ')
                   : 'Empreendedor Fundador'
                 }
               </span>
@@ -79,8 +79,8 @@ export default function ReportModule() {
             <div className="report-meta-item">
               <span className="report-meta-label">Setor de Atuação:</span>
               <span className="report-meta-val">
-                {identity.activitySectors && identity.activitySectors.length > 0 
-                  ? identity.activitySectors.join(', ') 
+                {identity.activitySectors && identity.activitySectors.length > 0
+                  ? identity.activitySectors.join(', ')
                   : 'Não especificado'
                 }
               </span>
@@ -100,7 +100,7 @@ export default function ReportModule() {
             <span className="report-section-num">MÓDULO 1</span>
             <h2 className="report-section-title">Apresentação e Identidade do Negócio</h2>
           </div>
-          
+
           <div className="report-text-block">
             {identity.mission && (
               <div style={{ marginBottom: '16px' }}>
@@ -108,14 +108,14 @@ export default function ReportModule() {
                 <p style={{ marginTop: '4px' }}>{identity.mission}</p>
               </div>
             )}
-            
+
             {identity.vision && (
               <div style={{ marginBottom: '16px' }}>
                 <strong style={{ color: 'var(--text-heading)' }}>Visão:</strong>
                 <p style={{ marginTop: '4px' }}>{identity.vision}</p>
               </div>
             )}
-            
+
             {identity.values && (
               <div style={{ marginBottom: '16px' }}>
                 <strong style={{ color: 'var(--text-heading)' }}>Valores:</strong>
@@ -164,7 +164,7 @@ export default function ReportModule() {
             <span className="report-section-num">MÓDULO 2</span>
             <h2 className="report-section-title">Resumo Executivo</h2>
           </div>
-          
+
           <div className="report-text-block" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {executive.opportunity && (
               <div>
@@ -172,14 +172,14 @@ export default function ReportModule() {
                 <p style={{ marginTop: '4px' }}>{executive.opportunity}</p>
               </div>
             )}
-            
+
             {executive.problem && (
               <div>
                 <strong style={{ color: 'var(--text-heading)' }}>O Problema Identificado:</strong>
                 <p style={{ marginTop: '4px' }}>{executive.problem}</p>
               </div>
             )}
-            
+
             {executive.solution && (
               <div>
                 <strong style={{ color: 'var(--text-heading)' }}>A Solução Desenvolvida:</strong>
@@ -290,17 +290,17 @@ export default function ReportModule() {
             <div className="report-swot-card strengths">
               <h4 className="report-swot-title">Forças</h4>
               <ul className="report-swot-list">
-                {swot.strengths && swot.strengths.length > 0 
+                {swot.strengths && swot.strengths.length > 0
                   ? swot.strengths.map((item, i) => <li key={i}>{item}</li>)
                   : <li>Nenhuma listada</li>
                 }
               </ul>
             </div>
-            
+
             <div className="report-swot-card weaknesses">
               <h4 className="report-swot-title">Fraquezas</h4>
               <ul className="report-swot-list">
-                {swot.weaknesses && swot.weaknesses.length > 0 
+                {swot.weaknesses && swot.weaknesses.length > 0
                   ? swot.weaknesses.map((item, i) => <li key={i}>{item}</li>)
                   : <li>Nenhuma listada</li>
                 }
@@ -310,7 +310,7 @@ export default function ReportModule() {
             <div className="report-swot-card opportunities">
               <h4 className="report-swot-title">Oportunidades</h4>
               <ul className="report-swot-list">
-                {swot.opportunities && swot.opportunities.length > 0 
+                {swot.opportunities && swot.opportunities.length > 0
                   ? swot.opportunities.map((item, i) => <li key={i}>{item}</li>)
                   : <li>Nenhuma listada</li>
                 }
@@ -320,7 +320,7 @@ export default function ReportModule() {
             <div className="report-swot-card threats">
               <h4 className="report-swot-title">Ameaças</h4>
               <ul className="report-swot-list">
-                {swot.threats && swot.threats.length > 0 
+                {swot.threats && swot.threats.length > 0
                   ? swot.threats.map((item, i) => <li key={i}>{item}</li>)
                   : <li>Nenhuma listada</li>
                 }
@@ -383,7 +383,7 @@ export default function ReportModule() {
                 <p style={{ marginTop: '4px' }}>{marketing.promotions}</p>
               </div>
             )}
-            
+
             {marketing.channels && (
               <div>
                 <strong style={{ color: 'var(--text-heading)' }}>Canais de Comercialização:</strong>
@@ -603,7 +603,7 @@ export default function ReportModule() {
                   <tr>
                     <th>Etapas do Resultado Operacional</th>
                     <th style={{ textAlign: 'right', width: '22%' }}>Projeção Mensal</th>
-                    <th style={{ textAlign: 'right', width: '22%' }}>Projeção Anual (12 Meses)</th>
+                    <th style={{ textAlign: 'right', width: '22%' }}>Projeção Anual</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -630,9 +630,9 @@ export default function ReportModule() {
               Referências Metodológicas e Créditos
             </h4>
             <p style={{ fontSize: '12px', color: 'var(--text-muted)', lineHeight: '1.6', maxWidth: '800px', margin: '0 auto' }}>
-              Este Plano de Negócios foi gerado de acordo com as orientações técnicas, taxonomia, conceitos e estruturas de tabelas do manual oficial 
-              <strong> "Como Elaborar um Plano de Negócios" (Sebrae, 2021)</strong>. 
-              As regras de viabilidade econômico-financeira de investimento, cálculo de encargos trabalhistas a 79%, DRE operacional e estimativas de payback 
+              Este Plano de Negócios foi gerado de acordo com as orientações técnicas, taxonomia, conceitos e estruturas de tabelas do manual oficial
+              <strong> "Como Elaborar um Plano de Negócios" (Sebrae, 2021)</strong>.
+              As regras de viabilidade econômico-financeira de investimento, cálculo de encargos trabalhistas a 79%, DRE operacional e estimativas de payback
               seguem estritamente as melhores práticas de planejamento ensinadas pelo Sebrae para micro e pequenas empresas brasileiras.
             </p>
             <span style={{ fontSize: '11px', fontWeight: '700', display: 'block', marginTop: '16px', color: 'var(--text-heading)' }}>
