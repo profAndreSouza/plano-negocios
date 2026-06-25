@@ -11,7 +11,7 @@ export default function ContextHelp() {
       title: 'Painel Geral',
       concept: 'Aqui você acompanha o progresso de cada etapa e vê em tempo real a viabilidade do negócio.',
       guidelines: [
-        'Complete todas as 7 etapas numeradas no menu lateral para obter dados financeiros precisos.',
+        'Complete todas as 9 etapas numeradas no menu lateral para obter dados financeiros precisos.',
         'A viabilidade de seu plano é calculada com base nas suas projeções de vendas, custos e investimentos.',
         'Fique atento aos alertas: caso o payback seja muito longo ou a lucratividade esteja negativa, revise suas despesas ou preços de venda.'
       ],
