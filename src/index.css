@@ -2441,4 +2441,10 @@ button, input, select, textarea {
   box-shadow: 0 2px 4px rgba(15, 118, 110, 0.1);
 }
 
+.logo-upload-zone:hover {
+  border-color: var(--primary) !important;
+  background-color: var(--primary-light) !important;
+}
+
+
 

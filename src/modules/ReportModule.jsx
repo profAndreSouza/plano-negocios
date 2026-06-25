@@ -68,10 +68,30 @@ export default function ReportModule() {
       </div>
 
       {/* Printable Report Document */}
-      <article className="report-view">
+      <article
+        className="report-view"
+        style={{
+          '--primary': identity.theme?.primary || '#0f766e',
+          '--primary-hover': identity.theme?.primary || '#115e59',
+          '--primary-light': `${identity.theme?.primary || '#0f766e'}10`,
+          '--primary-border': `${identity.theme?.primary || '#0f766e'}20`,
+          '--secondary': identity.theme?.secondary || '#0284c7',
+          '--secondary-hover': identity.theme?.secondary || '#0369a1',
+          '--secondary-light': `${identity.theme?.secondary || '#0284c7'}10`
+        }}
+      >
 
         {/* Cover Page */}
         <section className="report-cover">
+          {identity.logoUrl && (
+            <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'center', width: '100%' }}>
+              <img
+                src={identity.logoUrl}
+                alt="Logotipo"
+                style={{ maxHeight: '90px', maxWidth: '280px', objectFit: 'contain' }}
+              />
+            </div>
+          )}
           <span className="report-cover-tag">Plano de Negócios</span>
           <h1 className="report-cover-title">
             {identity.name || activePlan.name}
