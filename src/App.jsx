@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PlanProvider, usePlan } from './context/PlanContext';
+import { AuthProvider } from './context/AuthContext';
 import Sidebar from './components/Sidebar';
 import ContextHelp from './components/ContextHelp';
 import DashboardModule from './modules/DashboardModule';
@@ -12,6 +13,7 @@ import OperationalModule from './modules/OperationalModule';
 import FinancialModule from './modules/FinancialModule';
 import ReportModule from './modules/ReportModule';
 import MobileNextButton from './components/MobileNextButton';
+import AuthModal from './components/AuthModal';
 
 function AppContent() {
   const { activeTab, isHelpOpen, setIsHelpOpen, toasts, activePlan } = usePlan();
@@ -138,15 +140,20 @@ function AppContent() {
           </div>
         ))}
       </div>
+
+      {/* Authentication Modal */}
+      <AuthModal />
     </div>
   );
 }
 
 function App() {
   return (
-    <PlanProvider>
-      <AppContent />
-    </PlanProvider>
+    <AuthProvider>
+      <PlanProvider>
+        <AppContent />
+      </PlanProvider>
+    </AuthProvider>
   );
 }
 

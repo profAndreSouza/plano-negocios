@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useAuth } from './AuthContext';
+import { supabase } from '../lib/supabase';
 
 const PlanContext = createContext();
 
@@ -90,31 +92,102 @@ export const PlanProvider = ({ children }) => {
   const [plans, setPlans] = useState([]);
   const [activePlanId, setActivePlanId] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isHelpOpen, setIsHelpOpen] = useState(true);
   const [toasts, setToasts] = useState([]);
 
-  // Load plans from local storage
+  const { user, loading: authLoading } = useAuth();
+
+  // Load plans from Supabase or localStorage based on Auth State
   useEffect(() => {
-    const storedPlans = localStorage.getItem('bp_plans');
-    if (storedPlans) {
+    if (authLoading) return;
+
+    const fetchPlansFromSupabase = async (userId) => {
       try {
-        const parsed = JSON.parse(storedPlans);
-        setPlans(parsed);
-        if (parsed.length > 0) {
-          setActivePlanId(parsed[0].id);
+        const { data, error } = await supabase
+          .from('plans')
+          .select('*')
+          .order('updated_at', { ascending: false });
+
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+          const fetchedPlans = data.map((row) => ({
+            ...row.data,
+            id: row.id,
+            name: row.name,
+            createdAt: row.created_at || row.data.createdAt,
+            updatedAt: row.updated_at || row.data.updatedAt
+          }));
+          setPlans(fetchedPlans);
+          setActivePlanId(fetchedPlans[0].id);
+        } else {
+          // If Supabase database is empty, sync local guest plans to cloud
+          const localPlans = JSON.parse(localStorage.getItem('bp_plans') || '[]');
+          if (localPlans.length > 0) {
+            showToast('Sincronizando seus planos locais com a nuvem...', 'info');
+            const upsertPromises = localPlans.map(plan => {
+              return supabase.from('plans').upsert({
+                id: plan.id,
+                user_id: userId,
+                name: plan.name,
+                data: plan,
+                updated_at: new Date().toISOString()
+              });
+            });
+            await Promise.all(upsertPromises);
+            setPlans(localPlans);
+            setActivePlanId(localPlans[0].id);
+            showToast('Planos sincronizados com sucesso!', 'success');
+          } else {
+            // Create a default first plan on cloud
+            const defaultPlan = createBlankPlan('Meu Primeiro Negócio');
+            const { error: insertError } = await supabase.from('plans').insert({
+              id: defaultPlan.id,
+              user_id: userId,
+              name: defaultPlan.name,
+              data: defaultPlan,
+              updated_at: defaultPlan.updatedAt
+            });
+            if (insertError) throw insertError;
+            setPlans([defaultPlan]);
+            setActivePlanId(defaultPlan.id);
+          }
         }
-      } catch (e) {
-        console.error('Erro ao ler planos do localStorage', e);
+      } catch (err) {
+        console.error('Erro ao carregar planos do Supabase', err);
+        showToast('Erro ao carregar dados da nuvem. Exibindo dados locais offline.', 'danger');
+        loadLocalStoragePlans();
       }
+    };
+
+    const loadLocalStoragePlans = () => {
+      const storedPlans = localStorage.getItem('bp_plans');
+      if (storedPlans) {
+        try {
+          const parsed = JSON.parse(storedPlans);
+          setPlans(parsed);
+          if (parsed.length > 0) {
+            setActivePlanId(parsed[0].id);
+          }
+        } catch (e) {
+          console.error('Erro ao ler planos do localStorage', e);
+        }
+      } else {
+        const defaultPlan = createBlankPlan('Meu Primeiro Negócio');
+        setPlans([defaultPlan]);
+        setActivePlanId(defaultPlan.id);
+        localStorage.setItem('bp_plans', JSON.stringify([defaultPlan]));
+      }
+    };
+
+    if (user) {
+      fetchPlansFromSupabase(user.id);
     } else {
-      // Create a default plan on first load
-      const defaultPlan = createBlankPlan('Meu Primeiro Negócio');
-      setPlans([defaultPlan]);
-      setActivePlanId(defaultPlan.id);
-      localStorage.setItem('bp_plans', JSON.stringify([defaultPlan]));
+      loadLocalStoragePlans();
     }
-  }, []);
+  }, [user, authLoading]);
 
   // Show a toast message
   const showToast = (message, type = 'success') => {
@@ -129,63 +202,122 @@ export const PlanProvider = ({ children }) => {
   const activePlan = plans.find((p) => p.id === activePlanId) || null;
 
   // Create a new business plan
-  const createNewPlan = (name) => {
+  const createNewPlan = async (name) => {
     const newPlan = createBlankPlan(name);
     const updated = [newPlan, ...plans];
     setPlans(updated);
     setActivePlanId(newPlan.id);
     localStorage.setItem('bp_plans', JSON.stringify(updated));
-    showToast(`Plano "${name}" criado com sucesso!`);
+
+    if (user) {
+      try {
+        const { error } = await supabase.from('plans').insert({
+          id: newPlan.id,
+          user_id: user.id,
+          name: newPlan.name,
+          data: newPlan,
+          updated_at: newPlan.updatedAt
+        });
+        if (error) throw error;
+        showToast(`Plano "${name}" criado na nuvem!`);
+      } catch (err) {
+        console.error('Erro ao criar plano no Supabase', err);
+        showToast('Criado localmente. Erro ao salvar na nuvem.', 'warning');
+      }
+    } else {
+      showToast(`Plano "${name}" criado localmente!`);
+    }
   };
 
   // Delete a business plan
-  const deletePlan = (id) => {
+  const deletePlan = async (id) => {
     if (plans.length <= 1) {
       showToast('Você deve manter pelo menos um plano de negócios.', 'warning');
       return;
     }
+    const planToDelete = plans.find((p) => p.id === id);
     const filtered = plans.filter((p) => p.id !== id);
     setPlans(filtered);
     setActivePlanId(filtered[0].id);
     localStorage.setItem('bp_plans', JSON.stringify(filtered));
-    showToast('Plano de negócios excluído.');
+
+    if (user) {
+      try {
+        const { error } = await supabase.from('plans').delete().eq('id', id);
+        if (error) throw error;
+        showToast(`Plano "${planToDelete?.name || ''}" excluído da nuvem.`);
+      } catch (err) {
+        console.error('Erro ao excluir plano no Supabase', err);
+        showToast('Excluído localmente. Erro ao remover da nuvem.', 'warning');
+      }
+    } else {
+      showToast('Plano de negócios excluído localmente.');
+    }
   };
 
   // Update active plan data
-  const updateActivePlan = (updater) => {
+  const updateActivePlan = async (updater) => {
     if (!activePlanId) return;
 
-    setPlans((prevPlans) => {
-      const updatedPlans = prevPlans.map((plan) => {
-        if (plan.id === activePlanId) {
-          const updated = {
-            ...plan,
-            ...updater(plan),
-            updatedAt: new Date().toISOString()
-          };
-          // Persist directly to local storage inside updater callback
-          localStorage.setItem('bp_plans', JSON.stringify(
-            prevPlans.map(p => p.id === activePlanId ? updated : p)
-          ));
-          return updated;
-        }
-        return plan;
-      });
-      return updatedPlans;
-    });
+    const currentPlan = plans.find(p => p.id === activePlanId);
+    if (!currentPlan) return;
+
+    const updatedData = updater(currentPlan);
+    const updatedPlan = {
+      ...currentPlan,
+      ...updatedData,
+      updatedAt: new Date().toISOString()
+    };
+
+    // Update state and cache
+    const updatedPlans = plans.map(p => p.id === activePlanId ? updatedPlan : p);
+    setPlans(updatedPlans);
+    localStorage.setItem('bp_plans', JSON.stringify(updatedPlans));
+
+    if (user) {
+      try {
+        const { error } = await supabase.from('plans').upsert({
+          id: updatedPlan.id,
+          user_id: user.id,
+          name: updatedPlan.name || updatedPlan.identity?.name || 'Sem nome',
+          data: updatedPlan,
+          updated_at: updatedPlan.updatedAt
+        });
+        if (error) throw error;
+      } catch (err) {
+        console.error('Erro ao salvar no Supabase', err);
+      }
+    }
   };
 
   // Reset current plan
-  const resetPlan = () => {
+  const resetPlan = async () => {
     if (!activePlan) return;
     const blank = createBlankPlan(activePlan.name);
-    blank.id = activePlan.id; // Keep same ID
-    setPlans((prev) => {
-      const updated = prev.map((p) => (p.id === activePlan.id ? blank : p));
-      localStorage.setItem('bp_plans', JSON.stringify(updated));
-      return updated;
-    });
-    showToast('Progresso do plano reiniciado.', 'info');
+    blank.id = activePlan.id;
+
+    const updatedPlans = plans.map((p) => (p.id === activePlan.id ? blank : p));
+    setPlans(updatedPlans);
+    localStorage.setItem('bp_plans', JSON.stringify(updatedPlans));
+
+    if (user) {
+      try {
+        const { error } = await supabase.from('plans').upsert({
+          id: blank.id,
+          user_id: user.id,
+          name: blank.name,
+          data: blank,
+          updated_at: blank.updatedAt
+        });
+        if (error) throw error;
+        showToast('Progresso do plano reiniciado na nuvem.', 'info');
+      } catch (err) {
+        console.error('Erro ao reiniciar plano no Supabase', err);
+        showToast('Reiniciado localmente. Erro ao salvar na nuvem.', 'warning');
+      }
+    } else {
+      showToast('Progresso do plano reiniciado localmente.', 'info');
+    }
   };
 
   // Helper function to check filling completeness of each section
@@ -433,6 +565,8 @@ export const PlanProvider = ({ children }) => {
         progress,
         isModalOpen,
         setIsModalOpen,
+        isAuthModalOpen,
+        setIsAuthModalOpen,
         activeTab,
         setActiveTab,
         isHelpOpen,

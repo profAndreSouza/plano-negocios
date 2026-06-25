@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { usePlan } from '../context/PlanContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
   const {
@@ -14,8 +15,12 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
     activeTab,
     setActiveTab,
     isModalOpen,
-    setIsModalOpen
+    setIsModalOpen,
+    isAuthModalOpen,
+    setIsAuthModalOpen
   } = usePlan();
+
+  const { user, signOut } = useAuth();
 
   const [newPlanName, setNewPlanName] = useState('');
 
@@ -102,6 +107,42 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
                 </button>
               </div>
             </div>
+          </div>
+
+          {/* User Auth Section */}
+          <div className="sidebar-auth-section">
+            {user ? (
+              <div className="sidebar-auth-card authenticated">
+                <div className="auth-user-info">
+                  <span className="auth-avatar">👤</span>
+                  <div className="auth-user-meta">
+                    <span className="auth-user-email" title={user.email}>{user.email}</span>
+                    <span className="auth-sync-status">☁️ Nuvem Ativa</span>
+                  </div>
+                </div>
+                <button 
+                  className="btn-auth-logout" 
+                  onClick={() => {
+                    signOut();
+                  }} 
+                  title="Sair da Conta"
+                >
+                  Sair
+                </button>
+              </div>
+            ) : (
+              <div className="sidebar-auth-card unauthenticated">
+                <p className="auth-prompt-text">
+                  Salve na nuvem para acessar de qualquer lugar.
+                </p>
+                <button 
+                  className="btn-auth-login" 
+                  onClick={() => setIsAuthModalOpen(true)}
+                >
+                  🔑 Entrar / Cadastrar
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
