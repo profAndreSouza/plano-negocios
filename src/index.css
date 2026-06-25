@@ -2304,3 +2304,141 @@ button, input, select, textarea {
   gap: 6px;
   font-weight: 500;
 }
+
+/* Subtabs for TimelineModule */
+.tab-control-bar {
+  display: flex;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 6px;
+  gap: 8px;
+}
+
+.tab-control-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tab-control-btn:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-heading);
+}
+
+.tab-control-btn.active {
+  background-color: var(--secondary-light);
+  color: var(--secondary);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+/* Edit timeline table style */
+.edit-timeline-table td {
+  padding: 8px 12px;
+  vertical-align: middle;
+}
+.edit-timeline-table input[type="date"],
+.edit-timeline-table select,
+.edit-timeline-table input[type="text"] {
+  width: 100%;
+}
+
+/* Innovation Module Styles */
+.innovation-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .innovation-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.innovation-pillar-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.innovation-pillar-header {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.innovation-pillar-icon {
+  font-size: 24px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-light);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--primary-border);
+  flex-shrink: 0;
+}
+
+.innovation-pillar-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-heading);
+  margin-bottom: 4px;
+}
+
+.innovation-pillar-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.innovation-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.innovation-pill {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.innovation-pill:hover {
+  background-color: var(--border);
+  color: var(--text-heading);
+}
+
+.innovation-pill.selected {
+  background-color: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 2px 4px rgba(15, 118, 110, 0.1);
+}
+
+

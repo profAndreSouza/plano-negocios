@@ -235,7 +235,9 @@ export default function DashboardModule() {
                 { label: '4. Matriz SWOT (FOFA)', tab: 'swot', pct: progress.sections.swot || 0 },
                 { label: '5. Plano de Marketing', tab: 'marketing', pct: progress.sections.marketing || 0 },
                 { label: '6. Plano Operacional', tab: 'operational', pct: progress.sections.operational || 0 },
-                { label: '7. Plano Financeiro', tab: 'financial', pct: progress.sections.financial || 0 }
+                { label: '7. Plano Financeiro', tab: 'financial', pct: progress.sections.financial || 0 },
+                { label: '8. Frentes de Inovação', tab: 'innovation', pct: progress.sections.innovation || 0 },
+                { label: '9. Cronograma de Ações', tab: 'timeline', pct: progress.sections.timeline || 0 }
               ].map((item, idx) => (
                 <div key={idx} className="chart-bar-item" style={{ cursor: 'pointer' }} onClick={() => setActiveTab(item.tab)}>
                   <div className="chart-bar-labels" style={{ fontSize: '12px' }}>

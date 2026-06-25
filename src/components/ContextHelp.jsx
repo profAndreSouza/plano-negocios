@@ -92,6 +92,26 @@ export default function ContextHelp() {
       ],
       example: 'Investimento Fixo: R$ 50.000 em máquinas. Pre-operacional: R$ 5.000 em registros e pintura da loja. Giro: R$ 15.000 em caixa e estoque de ingredientes. Investimento Inicial Total = R$ 70.000.'
     },
+    innovation: {
+      title: '8. Frentes de Inovação',
+      concept: 'Identifique oportunidades de inovação no modelo de monetização, tecnologia, processos e ESG para diferenciar seu negócio.',
+      guidelines: [
+        'Dor de Mercado: Explique qual necessidade ou ineficiência real do mercado justifica as inovações propostas.',
+        'Pilares de Inovação: Selecione as frentes aplicáveis (como Assinaturas, Agentes de IA, Economia Circular) e detalhe como serão executadas.',
+        'Inovação Prática: Foque em inovações que aumentam a produtividade, reduzem custos ou melhoram a experiência de compra do cliente.'
+      ],
+      example: 'Inovação de Processo: "Automatizar a conciliação de pagamentos usando integrações de API para reduzir o tempo administrativo semanal de 10h para 1h."'
+    },
+    timeline: {
+      title: '9. Cronograma do Projeto',
+      concept: 'Planeje os prazos acadêmicos para cada entrega do plano e estabeleça o roteiro prático para colocar a empresa de pé.',
+      guidelines: [
+        'Cronograma Educacional: Use para definir as datas em que cada etapa do plano de negócios deve ser apresentada ao professor ou concluída.',
+        'Cronograma do Negócio: Planeje o roteiro de implantação prática (registro, reforma, treinamento, compras) e indique o status de cada fase.',
+        'Atualize os prazos à medida que as entregas e as ações avançarem para manter o projeto sob controle.'
+      ],
+      example: 'Cronograma de Implantação: "Atividade: Pintura e fachada | Duração: 2 semanas | Responsável: Empreiteiro contratado | Status: Em andamento."'
+    },
     report: {
       title: 'Relatório Final',
       concept: 'Consolida todos os dados em um relatório formal pronto para impressão ou exportação em formato PDF.',

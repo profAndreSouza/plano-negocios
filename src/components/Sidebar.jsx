@@ -33,6 +33,8 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
     { id: 'marketing', label: '5. Plano de Marketing', badge: '5', key: 'marketing' },
     { id: 'operational', label: '6. Plano Operacional', badge: '6', key: 'operational' },
     { id: 'financial', label: '7. Plano Financeiro', badge: '7', key: 'financial' },
+    { id: 'innovation', label: '8. Frentes de Inovação', badge: '8', key: 'innovation' },
+    { id: 'timeline', label: '9. Cronograma de Ações', badge: '9', key: 'timeline' },
     { id: 'report', label: 'Relatório Final', badge: '📄', isGlobal: true }
   ];
 

@@ -6,7 +6,32 @@ export default function ReportModule() {
 
   if (!activePlan) return null;
 
-  const { identity, executive, market, swot, marketing, operational, financial } = activePlan;
+  const { identity, executive, market, swot, marketing, operational, financial, timeline, innovation } = activePlan;
+  const timelineData = timeline || { educational: [], business: [] };
+  const innovationData = innovation || {
+    painMotivator: '',
+    expectedImpact: '',
+    pillars: {
+      businessModel: { selected: [], description: '' },
+      technology: { selected: [], description: '' },
+      processes: { selected: [], description: '' },
+      esg: { selected: [], description: '' }
+    }
+  };
+
+  const innovationLabels = {
+    as_a_service: 'Venda como Serviço (Assinaturas)',
+    sharing_economy: 'Economia Compartilhada',
+    marketplace: 'Marketplace ou Plataformas',
+    ai_agents: 'Uso de Agentes de IA',
+    hyper_personalization: 'Hiperpersonalização / CRM',
+    omnichannel: 'Operação Omnichannel',
+    operational_efficiency: 'Eficiência Operacional / Logística',
+    open_innovation: 'Inovação Aberta (Parcerias)',
+    payment_automation: 'Automação de Checkout/Cobrança',
+    circular_economy: 'Economia Circular',
+    wellness_services: 'Serviços de Saúde e Bem-Estar'
+  };
 
   const formatCurrency = (val) => {
     return (val || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -636,8 +661,163 @@ export default function ReportModule() {
           </div>
         </section>
 
-        {/* 8. CRÉDITOS E REFERÊNCIAS */}
-        <section className="report-section" style={{ borderBottom: 'none', pageBreakInside: 'avoid', marginTop: '20px' }}>
+        {/* 8. FRENTES DE INOVAÇÃO */}
+        <section className="report-section">
+          <div className="report-section-header">
+            <span className="report-section-num">MÓDULO 8</span>
+            <h2 className="report-section-title">Frentes de Inovação</h2>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '16px' }}>
+            {innovationData.painMotivator && (
+              <div>
+                <strong style={{ color: 'var(--text-heading)', fontSize: '13px' }}>Dor de Mercado / Oportunidade Motivadora:</strong>
+                <p style={{ marginTop: '4px', fontSize: '13px' }}>{innovationData.painMotivator}</p>
+              </div>
+            )}
+
+            {innovationData.expectedImpact && (
+              <div>
+                <strong style={{ color: 'var(--text-heading)', fontSize: '13px' }}>Impacto Esperado no Negócio:</strong>
+                <p style={{ marginTop: '4px', fontSize: '13px' }}>{innovationData.expectedImpact}</p>
+              </div>
+            )}
+
+            <div style={{ marginTop: '12px' }}>
+              <h4 style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-heading)', marginBottom: '8px' }}>
+                Detalhamento dos Pilares de Inovação
+              </h4>
+              <div className="report-table-wrapper">
+                <table className="report-table">
+                  <thead>
+                    <tr>
+                      <th style={{ width: '30%' }}>Pilar de Inovação</th>
+                      <th style={{ width: '35%' }}>Frentes Selecionadas</th>
+                      <th style={{ width: '35%' }}>Aplicação Prática</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style={{ fontWeight: '600' }}>1. Modelo de Negócios e Monetização</td>
+                      <td>
+                        {innovationData.pillars?.businessModel?.selected?.length > 0
+                          ? innovationData.pillars.businessModel.selected.map(val => innovationLabels[val] || val).join(', ')
+                          : 'Nenhuma selecionada'}
+                      </td>
+                      <td>{innovationData.pillars?.businessModel?.description || 'Não especificado'}</td>
+                    </tr>
+                    <tr>
+                      <td style={{ fontWeight: '600' }}>2. Inovação Tecnológica e Digital</td>
+                      <td>
+                        {innovationData.pillars?.technology?.selected?.length > 0
+                          ? innovationData.pillars.technology.selected.map(val => innovationLabels[val] || val).join(', ')
+                          : 'Nenhuma selecionada'}
+                      </td>
+                      <td>{innovationData.pillars?.technology?.description || 'Não especificado'}</td>
+                    </tr>
+                    <tr>
+                      <td style={{ fontWeight: '600' }}>3. Inovação em Processos e Gestão</td>
+                      <td>
+                        {innovationData.pillars?.processes?.selected?.length > 0
+                          ? innovationData.pillars.processes.selected.map(val => innovationLabels[val] || val).join(', ')
+                          : 'Nenhuma selecionada'}
+                      </td>
+                      <td>{innovationData.pillars?.processes?.description || 'Não especificado'}</td>
+                    </tr>
+                    <tr>
+                      <td style={{ fontWeight: '600' }}>4. ESG e Sustentabilidade</td>
+                      <td>
+                        {innovationData.pillars?.esg?.selected?.length > 0
+                          ? innovationData.pillars.esg.selected.map(val => innovationLabels[val] || val).join(', ')
+                          : 'Nenhuma selecionada'}
+                      </td>
+                      <td>{innovationData.pillars?.esg?.description || 'Não especificado'}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 9. CRONOGRAMAS DO PROJETO */}
+        <section className="report-section">
+          <div className="report-section-header">
+            <span className="report-section-num">MÓDULO 9</span>
+            <h2 className="report-section-title">Cronogramas de Ações e Entregas</h2>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '16px' }}>
+            {/* 9.1 Cronograma de Implantação do Negócio */}
+            <div>
+              <h4 style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-heading)', marginBottom: '8px' }}>
+                9.1 Roteiro de Implantação do Empreendimento
+              </h4>
+              <div className="report-table-wrapper">
+                <table className="report-table">
+                  <thead>
+                    <tr>
+                      <th style={{ width: '45%' }}>Atividade / Fase Operacional</th>
+                      <th style={{ width: '20%' }}>Prazo / Duração</th>
+                      <th style={{ width: '20%' }}>Responsável</th>
+                      <th style={{ width: '15%' }}>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(timelineData.business || []).map((act) => {
+                      let statusLabel = '⚪ Planejado';
+                      if (act.status === 'in_progress') statusLabel = '🔵 Em Execução';
+                      if (act.status === 'completed') statusLabel = '🟢 Concluído';
+                      return (
+                        <tr key={act.id}>
+                          <td style={{ fontWeight: '600' }}>{act.task || 'Não especificado'}</td>
+                          <td>{act.duration || 'Não especificado'}</td>
+                          <td>{act.responsible || 'Não especificado'}</td>
+                          <td style={{ fontWeight: '600' }}>{statusLabel}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* 9.2 Cronograma Educacional */}
+            <div style={{ marginTop: '8px' }}>
+              <h4 style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-heading)', marginBottom: '8px' }}>
+                9.2 Cronograma de Entregas Acadêmicas
+              </h4>
+              <div className="report-table-wrapper">
+                <table className="report-table">
+                  <thead>
+                    <tr>
+                      <th style={{ width: '40%' }}>Etapa / Módulo Acadêmico</th>
+                      <th style={{ width: '25%' }}>Prazo de Entrega</th>
+                      <th style={{ width: '35%' }}>Status de Entrega</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(timelineData.educational || []).map((item) => {
+                      let statusLabel = '🔴 Pendente';
+                      if (item.status === 'in_progress') statusLabel = '🟡 Em Andamento';
+                      if (item.status === 'delivered') statusLabel = '🟢 Entregue / Concluído';
+                      return (
+                        <tr key={item.key}>
+                          <td style={{ fontWeight: '600' }}>{item.label}</td>
+                          <td>{item.dueDate ? formatDate(item.dueDate) : 'Não definido'}</td>
+                          <td style={{ fontWeight: '600' }}>{statusLabel}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 10. CRÉDITOS E REFERÊNCIAS */}
+        <section className="report-section" style={{ borderBottom: 'none', pageBreakInside: 'avoid', marginTop: '8px' }}>
           <div style={{ padding: '24px', backgroundColor: 'var(--bg-main)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', textAlign: 'center' }}>
             <h4 style={{ fontSize: '13px', fontWeight: '800', color: 'var(--primary)', marginBottom: '8px', letterSpacing: '1px', textTransform: 'uppercase' }}>
               Referências Metodológicas e Créditos
@@ -647,6 +827,9 @@ export default function ReportModule() {
               <strong> "Como Elaborar um Plano de Negócios" (Sebrae, 2021)</strong>.
               As regras de viabilidade econômico-financeira de investimento, cálculo de encargos trabalhistas a 79%, DRE operacional e estimativas de payback
               seguem estritamente as melhores práticas de planejamento ensinadas pelo Sebrae para micro e pequenas empresas brasileiras.
+            </p>
+            <p style={{ fontSize: '12px', color: 'var(--text-muted)', lineHeight: '1.6', maxWidth: '800px', margin: '8px auto 0 auto', borderTop: '1px dashed var(--border)', paddingTop: '8px' }}>
+              <strong>Módulos 8 (Frentes de Inovação) e 9 (Cronograma de Ações):</strong> Elaborados e estruturados com base na metodologia didático-pedagógica da <strong>Profa. Dra. Ariane Diniz Silva</strong> (ariane_ds@yahoo.com.br).
             </p>
             <span style={{ fontSize: '11px', fontWeight: '700', display: 'block', marginTop: '16px', color: 'var(--text-heading)' }}>
               © Business Plan Builder. Desenvolvido em conformidade com o ecossistema Sebrae de orientação empresarial.

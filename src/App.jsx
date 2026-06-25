@@ -12,6 +12,8 @@ import MarketingModule from './modules/MarketingModule';
 import OperationalModule from './modules/OperationalModule';
 import FinancialModule from './modules/FinancialModule';
 import ReportModule from './modules/ReportModule';
+import TimelineModule from './modules/TimelineModule';
+import InnovationModule from './modules/InnovationModule';
 import MobileNextButton from './components/MobileNextButton';
 import AuthModal from './components/AuthModal';
 
@@ -45,6 +47,10 @@ function AppContent() {
         return <OperationalModule />;
       case 'financial':
         return <FinancialModule />;
+      case 'innovation':
+        return <InnovationModule />;
+      case 'timeline':
+        return <TimelineModule />;
       case 'report':
         return <ReportModule />;
       default:
@@ -70,6 +76,10 @@ function AppContent() {
         return { pre: 'Módulo 6', title: 'Plano Operacional', desc: 'Layout físico, capacidade produtiva máxima, processos e quadro de equipe.' };
       case 'financial':
         return { pre: 'Módulo 7', title: 'Plano Financeiro', desc: 'Investimentos, projeção de vendas, despesas recorrentes e DRE automático.' };
+      case 'innovation':
+        return { pre: 'Módulo 8', title: 'Frentes de Inovação', desc: 'Repense a forma como seu negócio cria, entrega e captura valor no mercado.' };
+      case 'timeline':
+        return { pre: 'Módulo 9', title: 'Cronograma do Projeto', desc: 'Planeje as entregas acadêmicas do plano e o roteiro de implantação do negócio.' };
       case 'report':
         return { pre: 'Consolidação', title: 'Relatório Final', desc: 'Visualize e exporte o Plano de Negócios completo de acordo com as normas do Sebrae.' };
       default:
@@ -83,16 +93,16 @@ function AppContent() {
     <div className="app-container">
       {/* Mobile Top Header */}
       <header className="mobile-top-bar">
-        <button 
-          className="menu-toggle-btn" 
+        <button
+          className="menu-toggle-btn"
           onClick={() => setIsSidebarOpen(true)}
           title="Menu de Navegação"
         >
           ☰
         </button>
         <span className="mobile-logo-text">BP Builder</span>
-        <button 
-          className="mobile-help-toggle" 
+        <button
+          className="mobile-help-toggle"
           onClick={() => setIsHelpOpen(!isHelpOpen)}
           title="Alternar Ajuda"
         >
@@ -114,7 +124,7 @@ function AppContent() {
               <p className="module-description">{header.desc}</p>
             </div>
             <div className="module-header-actions">
-              <button 
+              <button
                 className="help-toggle"
                 onClick={() => setIsHelpOpen(!isHelpOpen)}
               >
@@ -126,6 +136,27 @@ function AppContent() {
           <div style={{ flexGrow: 1 }}>
             {renderActiveModule()}
           </div>
+
+          {/* Footer Credits Div */}
+          {activeTab !== 'report' && (
+            <footer style={{ marginTop: '0px', padding: '20px', backgroundColor: 'var(--bg-card)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', textAlign: 'center' }}>
+              <h4 style={{ fontSize: '12px', fontWeight: '800', color: 'var(--primary)', marginBottom: '6px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                Referências Metodológicas e Créditos
+              </h4>
+              <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: '1.5', maxWidth: '800px', margin: '0 auto' }}>
+                Este Plano de Negócios é baseado nas orientações técnicas, taxonomia, conceitos e estruturas de tabelas do manual oficial
+                <strong> "Como Elaborar um Plano de Negócios" (Sebrae, 2021)</strong>.
+                As regras de viabilidade e cálculos seguem as melhores práticas do Sebrae para micro e pequenas empresas brasileiras.
+              </p>
+              <p style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: '1.5', maxWidth: '800px', margin: '6px auto 0 auto', borderTop: '1px dashed var(--border)', paddingTop: '6px' }}>
+                <strong>Módulos 8 (Frentes de Inovação) e 9 (Cronograma de Ações):</strong> Elaborados e estruturados com base na metodologia didático-pedagógica da <strong>Profa. Dra. Ariane Diniz Silva</strong> (ariane_ds@yahoo.com.br).
+              </p>
+              <span style={{ fontSize: '10px', fontWeight: '700', display: 'block', marginTop: '10px', color: 'var(--text-heading)' }}>
+                © Business Plan Builder. Desenvolvido em conformidade com o ecossistema Sebrae de orientação empresarial.
+              </span>
+            </footer>
+          )}
+
           <MobileNextButton />
         </main>
         <ContextHelp />

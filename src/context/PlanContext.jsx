@@ -84,6 +84,34 @@ const createBlankPlan = (name) => {
       salesProjections: {}, // { [productId]: monthlyQuantity }
       taxRate: 6, // default e.g. 6% (Simples Nacional comércio)
       commissionRate: 0 // default 0%
+    },
+    timeline: {
+      educational: [
+        { key: 'identity', label: '1. Identidade do Negócio', dueDate: '', status: 'pending', notes: '' },
+        { key: 'executive', label: '2. Resumo Executivo', dueDate: '', status: 'pending', notes: '' },
+        { key: 'market', label: '3. Análise de Mercado', dueDate: '', status: 'pending', notes: '' },
+        { key: 'swot', label: '4. Matriz SWOT (FOFA)', dueDate: '', status: 'pending', notes: '' },
+        { key: 'marketing', label: '5. Plano de Marketing', dueDate: '', status: 'pending', notes: '' },
+        { key: 'operational', label: '6. Plano Operacional', dueDate: '', status: 'pending', notes: '' },
+        { key: 'financial', label: '7. Plano Financeiro', dueDate: '', status: 'pending', notes: '' }
+      ],
+      business: [
+        { id: '1', task: 'Pesquisa e validação com fornecedores', duration: '1 mês', responsible: 'Sócios', status: 'planned' },
+        { id: '2', task: 'Registro da empresa e licenças', duration: '1 mês', responsible: 'Contador / Sócios', status: 'planned' },
+        { id: '3', task: 'Reforma e preparação do espaço físico', duration: '2 meses', responsible: 'Sócios / Empreiteiro', status: 'planned' },
+        { id: '4', task: 'Campanha de divulgação e marketing inicial', duration: '1 mês', responsible: 'Sócios / Agência', status: 'planned' },
+        { id: '5', task: 'Início oficial das operações e vendas', duration: 'Contínuo', responsible: 'Equipe', status: 'planned' }
+      ]
+    },
+    innovation: {
+      painMotivator: '',
+      expectedImpact: '',
+      pillars: {
+        businessModel: { selected: [], description: '' },
+        technology: { selected: [], description: '' },
+        processes: { selected: [], description: '' },
+        esg: { selected: [], description: '' }
+      }
     }
   };
 };
@@ -340,7 +368,9 @@ export const PlanProvider = ({ children }) => {
       swot: 0,
       marketing: 0,
       operational: 0,
-      financial: 0
+      financial: 0,
+      timeline: 0,
+      innovation: 0
     };
 
     // Identity progress
@@ -414,6 +444,31 @@ export const PlanProvider = ({ children }) => {
     ];
     const filledFinancial = financialFields.filter(checkFilled).length;
     sections.financial = Math.round((filledFinancial / financialFields.length) * 100);
+
+    // Timeline progress
+    const timelineData = plan.timeline || { educational: [], business: [] };
+    const educationalFilled = (timelineData.educational || []).filter(item => checkFilled(item.dueDate)).length;
+    const businessFilled = (timelineData.business || []).length > 0 ? 1 : 0;
+    const eduPercentage = (timelineData.educational || []).length > 0 ? Math.round((educationalFilled / timelineData.educational.length) * 100) : 0;
+    const bizPercentage = businessFilled * 100;
+    sections.timeline = Math.round(eduPercentage * 0.7 + bizPercentage * 0.3);
+
+    // Innovation progress
+    const innovationData = plan.innovation || { painMotivator: '', expectedImpact: '', pillars: {} };
+    const coreFields = [innovationData.painMotivator, innovationData.expectedImpact];
+    const filledCore = coreFields.filter(checkFilled).length;
+    const pillars = innovationData.pillars || {};
+    let pillarsCount = 0;
+    let pillarsFilled = 0;
+    Object.keys(pillars).forEach(key => {
+      pillarsCount++;
+      if (checkFilled(pillars[key].description) || (pillars[key].selected && pillars[key].selected.length > 0)) {
+        pillarsFilled++;
+      }
+    });
+    const corePct = Math.round((filledCore / coreFields.length) * 100);
+    const pillarsPct = pillarsCount > 0 ? Math.round((pillarsFilled / pillarsCount) * 100) : 0;
+    sections.innovation = Math.round(corePct * 0.4 + pillarsPct * 0.6);
 
     // Global completion average
     const keys = Object.keys(sections);
